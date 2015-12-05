@@ -14,7 +14,7 @@ class TestGridWorld(unittest.TestCase):
                        18, 16, 16, 17, 30]
         cls.max_time = 10
         cls.settings = {'alpha': 0.2, 'gamma': 0.9,
-                        'rar': 0.98, 'radr': 0.9999,
+                        'rar': 0.98, 'radr': 0.999,
                         'verbose': False}
 
     def test_base(self):
@@ -29,6 +29,8 @@ class TestGridWorld(unittest.TestCase):
 
     def test_dyna(self):
         self.settings['dyna'] = 100
+        self.settings['rar'] = 0.5
+        self.settings['radr'] = 0.99
         for i, world in enumerate(self.worlds[:2]):
             fname = os.path.join(self.base_dir, 'world' + world + '.csv')
             agent = GridWorldAgent(fname, **self.settings)
