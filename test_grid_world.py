@@ -14,7 +14,7 @@ class TestGridWorld(unittest.TestCase):
                        18, 16, 16, 17, 30]
         cls.max_time = 10
         cls.settings = {'alpha': 0.2, 'gamma': 0.9,
-                        'rar': 0.98, 'radr': 0.9999,
+                        'rar': 0.98, 'radr': 0.999,
                         'verbose': False}
 
     def test_base(self):
