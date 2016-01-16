@@ -29,6 +29,8 @@ class TestGridWorld(unittest.TestCase):
 
     def test_dyna(self):
         self.settings['dyna'] = 100
+        self.settings['rar'] = 0.5
+        self.settings['radr'] = 0.99
         for i, world in enumerate(self.worlds[:2]):
             fname = os.path.join(self.base_dir, 'world' + world + '.csv')
             agent = GridWorldAgent(fname, **self.settings)
