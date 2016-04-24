@@ -12,7 +12,8 @@ class TestGridWorld(unittest.TestCase):
                       '06', '07', '08', '09', '10']
         cls.optimal = [15, 16, 58, 26, 18,
                        18, 16, 16, 17, 30]
-        cls.max_time = 10
+        cls.max_time = 2
+        cls.max_dyna_time = 10
         cls.settings = {'alpha': 0.2, 'gamma': 0.9,
                         'rar': 0.98, 'radr': 0.999,
                         'verbose': False}
@@ -28,14 +29,14 @@ class TestGridWorld(unittest.TestCase):
                             'world {}: {} steps'.format(world, steps))
 
     def test_dyna(self):
-        self.settings['dyna'] = 100
+        self.settings['dyna'] = 200
         self.settings['rar'] = 0.5
         self.settings['radr'] = 0.99
         for i, world in enumerate(self.worlds[:2]):
             fname = os.path.join(self.base_dir, 'world' + world + '.csv')
             agent = GridWorldAgent(fname, **self.settings)
             time, steps = agent.learn(episodes=50)
-            self.assertTrue(time < self.max_time,
+            self.assertTrue(time < self.max_dyna_time,
                             'world {}: {} sec'.format(world, time))
             self.assertTrue(steps < 1.5 * self.optimal[i],
                             'world {}: {} steps'.format(world, steps))
